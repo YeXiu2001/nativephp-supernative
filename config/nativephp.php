@@ -17,6 +17,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Default Appearance / Theme Mode
+    |--------------------------------------------------------------------------
+    |
+    | Override OS system theme and force default theme.
+    | Options: 'light'  - Force light theme (overrides OS dark mode)
+    |          'dark'   - Force dark theme
+    |          'system' - Follow OS system theme
+    |
+    */
+
+    'appearance' => env('NATIVEPHP_APPEARANCE', 'light'),
+
+    /*
+    |--------------------------------------------------------------------------
     | App Version Code
     |--------------------------------------------------------------------------
     |
@@ -287,7 +301,7 @@ return [
         |          'dark'  - Dark icons
         |
         */
-        'status_bar_style' => 'auto',
+        'status_bar_style' => 'dark',
 
         /*
         |--------------------------------------------------------------------------
