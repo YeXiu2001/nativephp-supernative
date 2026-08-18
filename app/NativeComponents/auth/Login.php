@@ -7,6 +7,8 @@ use Native\Mobile\Edge\NativeComponent;
 
 class Login extends NativeComponent
 {
+    public string $username = "";
+    public string $password = "";
     public bool $isLoading = False;
 
     public function verify(): void
