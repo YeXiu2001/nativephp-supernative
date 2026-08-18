@@ -2,11 +2,15 @@
 
 namespace App\Providers;
 
+use App\Support\ThemeManager;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\Rules\Password;
+use Native\Mobile\Events\System\AppearanceChanged;
+use Native\Mobile\Facades\System;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +28,17 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+
+        $appearance = config('nativephp.appearance', 'light');
+        if ($appearance === 'light' || $appearance === 'dark') {
+            ThemeManager::setMode($appearance);
+
+            if ($appearance === 'light') {
+                Event::listen(AppearanceChanged::class, function () {
+                    System::rememberAppearance('light');
+                });
+            }
+        }
     }
 
     /**
